@@ -24,6 +24,5 @@ add_executable(forge_model
   src/aruco_6x6_models.cpp src/forge_png.cpp src/forge_png.hpp)
 
 target_link_libraries(forge_model
-  PRIVATE opencv_core
-  PRIVATE opencv_calib3d
+  LINK_PRIVATE ${OpenCV_LIBS}
   )
