@@ -19,7 +19,7 @@ namespace ros2_shared
 
       str.resize(str_len);
 
-      auto final_n = vsnprintf(const_cast<char *>(str.data()), str_len, fmt_str.c_str(), ap);
+      auto final_n = std::vsnprintf(const_cast<char *>(str.data()), str_len, fmt_str.c_str(), ap);
 
       // For an encoding error just return what is in the buffer.
       if (final_n < 0) {

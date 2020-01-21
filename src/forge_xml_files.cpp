@@ -184,7 +184,7 @@ namespace forge_model
     find_and_replace(model_material, "###marker_name###", model_name);
     save_text(std::string{file_path.c_str()}
                 .append("/materials/scripts/")
-                .append(model_name)
+                .append(model_name.c_str())
                 .append(".material"), model_material);
   }
 }
