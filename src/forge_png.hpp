@@ -13,6 +13,8 @@ namespace forge_model
   public:
     ForgePng(int rows, int cols);
 
+    ForgePng();
+
     int save(const std::string &filename);
 
     cv::Mat &img() {

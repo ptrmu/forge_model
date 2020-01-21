@@ -21,8 +21,12 @@ endif ()
 
 add_executable(forge_model
   src/forge_model_run.cpp
-  src/aruco_6x6_models.cpp src/forge_png.cpp src/forge_png.hpp)
+  src/aruco_6x6_models.cpp 
+  src/forge_png.cpp 
+  src/forge_xml_files.cpp 
+  )
 
 target_link_libraries(forge_model
   LINK_PRIVATE ${OpenCV_LIBS}
+  stdc++fs
   )
