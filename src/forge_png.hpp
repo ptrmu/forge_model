@@ -17,7 +17,8 @@ namespace forge_model
 
     int save(const std::string &filename);
 
-    cv::Mat &img() {
+    cv::Mat &img()
+    {
       return mat_;
     }
   };

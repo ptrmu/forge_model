@@ -23,7 +23,10 @@ add_executable(forge_model
   src/forge_model_run.cpp
   src/aruco_6x6_models.cpp 
   src/forge_png.cpp 
-  src/forge_xml_files.cpp 
+  src/forge_xml_files.cpp
+  src/charuco_models.cpp 
+  src/string_printf.cpp 
+  src/forge_model_files.cpp
   )
 
 target_link_libraries(forge_model

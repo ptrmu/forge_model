@@ -6,15 +6,15 @@
 
 namespace forge_model
 {
-  void generate_model_config(const std::string &model_name,
-                             const std::string &file_path);
+  struct ModelFiles;
 
-  void generate_model_sdf(const std::string &model_name,
-                          const std::string &marker_size,
-                          const std::string &file_path);
+  void generate_model_config(const ModelFiles &mf);
 
-  void generate_model_material(const std::string &model_name,
-                               const std::string &file_path);
+  void generate_model_sdf(const ModelFiles &mf,
+                          const std::string &marker_size_x,
+                          const std::string &marker_size_y);
+
+  void generate_model_material(const ModelFiles &mf);
 }
 
 #endif //_FORGE_XML_FILES_HPP

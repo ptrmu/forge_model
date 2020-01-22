@@ -1,5 +1,7 @@
 
+#include "forge_model_files.hpp"
 #include "forge_xml_files.hpp"
+#include "string_printf.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -44,11 +46,11 @@ namespace forge_model
 </model>
 )";
 
-  void generate_model_config(const std::string &model_name, const std::string &file_path)
+  void generate_model_config(const ModelFiles &mf)
   {
     std::string model_config{model_config_text};
-    find_and_replace(model_config, "###marker_name###", model_name);
-    save_text(std::string{file_path.c_str()}.append("/model.config"), model_config);
+    find_and_replace(model_config, "###marker_name###", mf.model_name_);
+    save_text(ros2_shared::string_printf("%s/model.config", mf.model_path_.c_str()), model_config);
   }
 
 
@@ -62,7 +64,7 @@ namespace forge_model
       <visual name='visual'>
         <geometry>
           <box>
-            <size>###marker_size### ###marker_size### 1e-5</size>
+            <size>###marker_size_x### ###marker_size_y### 1e-5</size>
           </box>
         </geometry>
         <material>
@@ -89,7 +91,7 @@ namespace forge_model
         <pose frame=''>0 0 0 0 0 0</pose>
         <geometry>
           <box>
-            <size>###marker_size### ###marker_size### 1e-05</size>
+            <size>###marker_size_x### ###marker_size_y### 1e-05</size>
           </box>
         </geometry>
       </collision>
@@ -100,7 +102,7 @@ namespace forge_model
       <visual name='visual'>
         <geometry>
           <box>
-            <size>###marker_size### ###marker_size### 1e-5</size>
+            <size>###marker_size_x### ###marker_size_y### 1e-5</size>
           </box>
         </geometry>
         <material>
@@ -126,7 +128,7 @@ namespace forge_model
         <pose frame=''>0 0 0 0 0 0</pose>
         <geometry>
           <box>
-            <size>###marker_size### ###marker_size### 1e-5</size>
+            <size>###marker_size_x### ###marker_size_y### 1e-5</size>
           </box>
         </geometry>
       </collision>
@@ -152,14 +154,15 @@ namespace forge_model
 </sdf>
 )";
 
-  void generate_model_sdf(const std::string &model_name,
-                          const std::string &marker_size,
-                          const std::string &file_path)
+  void generate_model_sdf(const ModelFiles &mf,
+                          const std::string &marker_size_x,
+                          const std::string &marker_size_y)
   {
     std::string model_sdf{model_sdf_text};
-    find_and_replace(model_sdf, "###marker_name###", model_name);
-    find_and_replace(model_sdf, "###marker_size###", marker_size);
-    save_text(std::string{file_path.c_str()}.append("/model.sdf"), model_sdf);
+    find_and_replace(model_sdf, "###marker_name###", mf.model_name_);
+    find_and_replace(model_sdf, "###marker_size_x###", marker_size_x);
+    find_and_replace(model_sdf, "###marker_size_y###", marker_size_y);
+    save_text(ros2_shared::string_printf("%s/model.sdf", mf.model_path_.c_str()), model_sdf);
   }
 
   static const std::string model_material_text =
@@ -177,14 +180,12 @@ namespace forge_model
 	}
 })";
 
-  void generate_model_material(const std::string &model_name,
-                               const std::string &file_path)
+  void generate_model_material(const ModelFiles &mf)
   {
     std::string model_material{model_material_text};
-    find_and_replace(model_material, "###marker_name###", model_name);
-    save_text(std::string{file_path.c_str()}
-                .append("/materials/scripts/")
-                .append(model_name.c_str())
-                .append(".material"), model_material);
+    find_and_replace(model_material, "###marker_name###", mf.model_name_);
+    save_text(ros2_shared::string_printf("%s/%s.material",
+                                         mf.scripts_path_.c_str(), mf.model_name_.c_str()),
+              model_material);
   }
 }

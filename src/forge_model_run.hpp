@@ -7,7 +7,8 @@
 namespace forge_model
 {
   void aruco_6x6_models(int n, const std::string &folder_name);
-  int forge_png_example();
+
+  void charuco_12x9_aruco_5x5_model(const std::string &folder_name);
 }
 
 #endif //_FORGE_MODEL_RUN_HPP
